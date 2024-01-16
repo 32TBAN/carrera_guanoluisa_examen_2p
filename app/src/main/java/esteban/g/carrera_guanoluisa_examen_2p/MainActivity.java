@@ -2,12 +2,18 @@ package esteban.g.carrera_guanoluisa_examen_2p;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import esteban.g.carrera_guanoluisa_examen_2p.Entidades.UsuarioCG;
+import esteban.g.carrera_guanoluisa_examen_2p.Logica.UsurioLogicaCG;
 
 public class MainActivity extends AppCompatActivity {
     private EditText editTextUserCG, editTextPasswordCG;
@@ -24,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         validarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validarUsuarioeditTextPasswordCG(editTextUserCG.getText().toString(), editTextPasswordCG.getText().toString())) {
-
+                if (validarUsuarioeditTextPasswordCG(editTextPasswordCG.getText().toString())) {
+                    List<UsuarioCG> listaUsuarioCG = UsurioLogicaCG.getListUsuarios();
                 } else {
                     Toast.makeText(MainActivity.this, "Error de validación", Toast.LENGTH_SHORT).show();
                 }
@@ -33,8 +39,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validarUsuarioeditTextPasswordCG(String correo, String clave) {
+    private boolean validarUsuarioeditTextPasswordCG(String passwordCG) {
+        String regexCG = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d.*\\d)(?=.*[@#$%^&+=])(?=\\S+$).{6,}$";
+        Pattern patternCG = Pattern.compile(regexCG);
+        Matcher matcherCG = patternCG.matcher(passwordCG);
 
-        return true;
+        if (matcherCG.matches()) {
+            return true;
+        } else {
+            Toast.makeText(MainActivity.this, "La contraseña no cumple con los requisitos", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 }

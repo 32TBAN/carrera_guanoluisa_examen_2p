@@ -1,26 +1,24 @@
 package esteban.g.carrera_guanoluisa_examen_2p.Entidades;
 
-package uta.fisei.app_004.entities;
+public class UsuarioCG {
 
-public class Usuario {
-
-    private String usernameCG;
+    private String emailCG;
     private String password;
 
-    public Usuario() {
+    public UsuarioCG() {
     }
 
-    public Usuario(String usernameCG, String password) {
-        this.usernameCG = usernameCG;
+    public UsuarioCG(String usernameCG, String password) {
+        this.emailCG = usernameCG;
         this.password = password;
     }
 
     public String getUsernameCG() {
-        return usernameCG;
+        return emailCG;
     }
 
     public void setUsernameCG(String usernameCG) {
-        this.usernameCG = usernameCG;
+        this.emailCG = usernameCG;
     }
 
     public String getPassword() {
