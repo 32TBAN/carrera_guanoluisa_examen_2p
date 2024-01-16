@@ -10,7 +10,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tvTitulo"
+        android:id="@+id/TituloCG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
@@ -20,35 +20,35 @@
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:id="@+id/etUsuario"
+        android:id="@+id/etUsuarioCG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Usuario"
-        android:layout_below="@id/tvTitulo"
+        android:layout_below="@id/TituloCG"
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:id="@+id/etContraseña"
+        android:id="@+id/etContraseñaCG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:layout_below="@id/etUsuario"
+        android:layout_below="@id/etUsuarioCG"
         android:layout_marginBottom="16dp"/>
 
     <Button
-        android:id="@+id/btnIniciarSesion"
+        android:id="@+id/btnIniciarSesionCG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Iniciar Sesión"
-        android:layout_below="@id/etContraseña"
+        android:layout_below="@id/etContraseñaCG"
         android:layout_marginBottom="16dp"/>
 
     <TextView
-        android:id="@+id/tvInfoLogin"
+        android:id="@+id/tvInfoLoginCG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="user1: "
         android:gravity="center"
-        android:layout_below="@id/btnIniciarSesion"/>
+        android:layout_below="@id/btnIniciarSesionCG"/>
 </RelativeLayout>
