@@ -7,23 +7,22 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class DatabaseManagerCG extends SQLiteOpenHelper {
-    final String CREATE_CLIENTS = "CREATE TABLE UsuariosCG (EMAILCG TEXT, " +
+    final String CREATE_USERCG = "CREATE TABLE UsuariosCG (EMAILCG TEXT, " +
                                                             "PASSWORDCG TEXT)";
-    final String DROP_TABLE = "DROP TABLE IF EXISTS UsuariosCG";
+    final String DROP_TABLECG = "DROP TABLE IF EXISTS UsuariosCG";
     public DatabaseManagerCG(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // sql para definir la estructura de la BD.
-        db.execSQL(CREATE_CLIENTS);
+        db.execSQL(CREATE_USERCG);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // sql para realizar cambios en la estructura de la base datos
-        db.execSQL(DROP_TABLE);
-        db.execSQL(CREATE_CLIENTS);
+        db.execSQL(DROP_TABLECG);
+        db.execSQL(CREATE_USERCG);
     }
 }

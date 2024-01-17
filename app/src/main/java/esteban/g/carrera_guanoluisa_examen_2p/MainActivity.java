@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import esteban.g.carrera_guanoluisa_examen_2p.Dal.DalUsuarioCG;
 import esteban.g.carrera_guanoluisa_examen_2p.Entidades.UsuarioCG;
 import esteban.g.carrera_guanoluisa_examen_2p.Logica.UsurioLogicaCG;
 
@@ -30,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
         validarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DalUsuarioCG dalUsuarioCG = new DalUsuarioCG(MainActivity.this);
+                dalUsuarioCG.insert();
                 if (validarUsuarioeditTextPasswordCG(editTextPasswordCG.getText().toString())) {
-                    List<UsuarioCG> listaUsuarioCG = UsurioLogicaCG.getListUsuarios();
+                    List<UsuarioCG> listaUsuarioCG = UsurioLogicaCG.getListUsuarios(MainActivity.this);
                 } else {
                     Toast.makeText(MainActivity.this, "Error de validación", Toast.LENGTH_SHORT).show();
                 }
