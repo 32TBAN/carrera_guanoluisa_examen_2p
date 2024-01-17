@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,7 +9,28 @@
         android:background="#3498db"
         android:padding="10dp">
 
-        <!-- Resto del contenido del titleBar (íconos, título, etc.) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lista de tareas"
+            />
+
+
+        <ImageView
+            android:id="@+id/iconAdd"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_add"
+            android:layout_marginEnd="10dp"/>
+
+        <ImageView
+            android:id="@+id/iconDelete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/iconAdd"
+            android:src="@drawable/ic_delete"
+        android:layout_marginEnd="10dp"/>
 
     </RelativeLayout>
 
@@ -23,7 +43,6 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <!-- Cambié el atributo onClick por un Listener en el código Java -->
         <TextView
             android:id="@+id/tabPersonal"
             android:layout_width="0dp"
@@ -47,25 +66,23 @@
             android:textColor="#000" />
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/personalTasksLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tabs">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tabs"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="10dp">
+    </LinearLayout>
 
-        <!-- Contenido de la pestaña Personal -->
-        <RecyclerView
-            android:id="@+id/recyclerViewPersonal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-
-        <!-- Contenido de la pestaña Business -->
-        <RecyclerView
-            android:id="@+id/recyclerViewBusiness"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-
-    </FrameLayout>
-
+    <LinearLayout
+        android:id="@+id/businessTasksLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tabs"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="10dp">
+    </LinearLayout>
 </RelativeLayout>
