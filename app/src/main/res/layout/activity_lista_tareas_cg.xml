@@ -66,23 +66,32 @@
             android:textColor="#000" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/personalTasksLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tabs"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:padding="10dp">
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs">
 
-    <LinearLayout
-        android:id="@+id/businessTasksLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tabs"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:padding="10dp">
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/personalTasksLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/businessTasksLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
