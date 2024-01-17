@@ -2,14 +2,17 @@
 package esteban.g.carrera_guanoluisa_examen_2p;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import esteban.g.carrera_guanoluisa_examen_2p.Entidades.TareaCG;
 
 public class ListaTareasCG extends AppCompatActivity {
@@ -17,6 +20,9 @@ public class ListaTareasCG extends AppCompatActivity {
     private LinearLayout personalTasksLayout;
     private LinearLayout businessTasksLayout;
     private static List<TareaCG> tareasList = new ArrayList<>();
+    private static List<TareaCG> tareasListBusunes = new ArrayList<>();
+    private static final int REQUEST_CODE_ADD_TASK = 1;
+    private boolean isBusinessTask = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +34,44 @@ public class ListaTareasCG extends AppCompatActivity {
 
         if (getIntent().hasExtra("tarea")) {
             TareaCG nuevaTarea = (TareaCG) getIntent().getSerializableExtra("tarea");
-            tareasList.add(nuevaTarea);
-            agregarTarea(personalTasksLayout, nuevaTarea);
+            if (isBusinessTask){
+                tareasListBusunes.add(nuevaTarea);
+                agregarTarea(businessTasksLayout, nuevaTarea);
+            }else{
+                tareasList.add(nuevaTarea);
+                agregarTarea(personalTasksLayout, nuevaTarea);
+            }
         }
 
         findViewById(R.id.ivAdd).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListaTareasCG.this, AgregarTareaActivityCG.class);
-                startActivity(intent);
+                if (isBusinessTask) {
+                    Intent intent = new Intent(ListaTareasCG.this, BusinessTasksActivityCG.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(ListaTareasCG.this, AgregarTareaActivityCG.class);
+                    startActivityForResult(intent, REQUEST_CODE_ADD_TASK);
+                }
             }
         });
 
         findViewById(R.id.tabPersonal).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                isBusinessTask = false;
                 showPersonalTasks();
             }
         });
 
         findViewById(R.id.tabBusiness).setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ListaTareasCG.this, BusinessTasksActivityCG.class);
-                startActivity(intent);
+                isBusinessTask = true;
+                showBusinesTasks();
             }
         });
 
@@ -78,5 +98,26 @@ public class ListaTareasCG extends AppCompatActivity {
     private void showPersonalTasks() {
         personalTasksLayout.setVisibility(View.VISIBLE);
         businessTasksLayout.setVisibility(View.GONE);
+    }
+
+    private void showBusinesTasks() {
+        personalTasksLayout.setVisibility(View.GONE);
+        businessTasksLayout.setVisibility(View.VISIBLE);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE_ADD_TASK && resultCode == RESULT_OK) {
+            TareaCG nuevaTarea = (TareaCG) data.getSerializableExtra("tarea");
+
+            if (isBusinessTask) {
+                tareasListBusunes.add(nuevaTarea);
+                agregarTarea(businessTasksLayout, nuevaTarea);
+            } else {
+                tareasList.add(nuevaTarea);
+                agregarTarea(personalTasksLayout, nuevaTarea);
+            }
+        }
     }
 }

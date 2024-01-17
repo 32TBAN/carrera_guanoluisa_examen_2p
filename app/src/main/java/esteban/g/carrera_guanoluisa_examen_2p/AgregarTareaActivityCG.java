@@ -29,7 +29,8 @@ public class AgregarTareaActivityCG extends AppCompatActivity {
 
                 Intent intent = new Intent(AgregarTareaActivityCG.this, ListaTareasCG.class);
                 intent.putExtra("tarea", nuevaTarea);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
