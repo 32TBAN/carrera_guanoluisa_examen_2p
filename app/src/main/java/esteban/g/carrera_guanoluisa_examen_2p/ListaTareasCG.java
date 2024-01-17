@@ -1,20 +1,22 @@
+// ListaTareasCG.java
 package esteban.g.carrera_guanoluisa_examen_2p;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import java.util.ArrayList;
+import java.util.List;
 import esteban.g.carrera_guanoluisa_examen_2p.Entidades.TareaCG;
 
 public class ListaTareasCG extends AppCompatActivity {
 
     private LinearLayout personalTasksLayout;
     private LinearLayout businessTasksLayout;
+    private static List<TareaCG> tareasList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +26,9 @@ public class ListaTareasCG extends AppCompatActivity {
         personalTasksLayout = findViewById(R.id.personalTasksLayout);
         businessTasksLayout = findViewById(R.id.businessTasksLayout);
 
-        // Verifica si hay una tarea enviada
         if (getIntent().hasExtra("tarea")) {
             TareaCG nuevaTarea = (TareaCG) getIntent().getSerializableExtra("tarea");
+            tareasList.add(nuevaTarea);
             agregarTarea(personalTasksLayout, nuevaTarea);
         }
 
@@ -48,35 +50,33 @@ public class ListaTareasCG extends AppCompatActivity {
         findViewById(R.id.tabBusiness).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showBusinessTasks();
+                Intent intent = new Intent(ListaTareasCG.this, BusinessTasksActivityCG.class);
+                startActivity(intent);
             }
         });
+
+        for (TareaCG tarea : tareasList) {
+            agregarTarea(personalTasksLayout, tarea);
+        }
     }
 
     private void agregarTarea(LinearLayout layout, TareaCG nuevaTarea) {
-        if (layout.getChildCount() == 0) {
-            CheckBox checkBox = new CheckBox(this);
-            checkBox.setText(nuevaTarea.getTarea());
+        CheckBox checkBox = new CheckBox(this);
+        checkBox.setText(nuevaTarea.getTarea());
 
-            TextView tareaTextView = new TextView(this);
-            tareaTextView.setText(nuevaTarea.getTarea());
+        TextView tareaTextView = new TextView(this);
+        tareaTextView.setText(nuevaTarea.getTarea());
 
-            TextView notasTextView = new TextView(this);
-            notasTextView.setText(nuevaTarea.getNotas());
+        TextView notasTextView = new TextView(this);
+        notasTextView.setText(nuevaTarea.getNotas());
 
-            layout.addView(checkBox);
-            layout.addView(tareaTextView);
-            layout.addView(notasTextView);
-        }
+        layout.addView(checkBox);
+        layout.addView(tareaTextView);
+        layout.addView(notasTextView);
     }
 
     private void showPersonalTasks() {
         personalTasksLayout.setVisibility(View.VISIBLE);
         businessTasksLayout.setVisibility(View.GONE);
-    }
-
-    private void showBusinessTasks() {
-        personalTasksLayout.setVisibility(View.GONE);
-        businessTasksLayout.setVisibility(View.VISIBLE);
     }
 }
