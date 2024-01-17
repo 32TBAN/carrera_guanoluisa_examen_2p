@@ -13,24 +13,24 @@
             android:id="@+id/ivAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:src="@drawable/icc_listo" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lista de tareas"/>
+            android:text="Lista de tareas" />
 
         <ImageView
             android:id="@+id/iconDelete"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
             android:layout_toLeftOf="@id/ivAdd"
-            android:src="@drawable/ic_delete"
-        android:layout_marginEnd="10dp"/>
+            android:src="@drawable/ic_delete" />
 
     </RelativeLayout>
 
@@ -48,41 +48,53 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
             android:clickable="true"
+            android:gravity="center"
             android:text="Personal"
-            android:textSize="16sp"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tabBusiness"
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tareasCG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tabs"
+        android:background="#f1f1f1"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/tareaCg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
             android:clickable="true"
-            android:text="Business"
-            android:textSize="16sp"
-            android:textColor="#000" />
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/personalTasksLayout"
+        android:id="@+id/notasCG"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tabs"
-        android:orientation="vertical"
-        android:visibility="gone"
+        android:layout_below="@id/tareasCG"
+        android:background="#f1f1f1"
+        android:orientation="horizontal"
         android:padding="10dp">
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/businessTasksLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tabs"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:padding="10dp">
+        <EditText
+            android:id="@+id/notaCG"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
     </LinearLayout>
 </RelativeLayout>
