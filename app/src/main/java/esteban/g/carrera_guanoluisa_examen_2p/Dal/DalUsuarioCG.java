@@ -29,14 +29,15 @@ public class DalUsuarioCG {
 
         Cursor cursor = sqLiteDatabase.rawQuery(query, null);
 
-        if (cursor.moveToFirst()) {
-            do {
-                @SuppressLint("Range") String emailCG = cursor.getString(cursor.getColumnIndex("email"));
-                @SuppressLint("Range") String passwordCG = cursor.getString(cursor.getColumnIndex("password"));
+        int emailIndex = cursor.getColumnIndex("EMAILCG");
+        int passwordIndex = cursor.getColumnIndex("PASSWORDCG");
 
-                UsuarioCG usuario = new UsuarioCG(emailCG, passwordCG);
-                usuarios.add(usuario);
-            } while (cursor.moveToNext());
+        while (cursor.moveToNext()) {
+            String emailCG = cursor.getString(emailIndex);
+            String passwordCG = cursor.getString(passwordIndex);
+
+            UsuarioCG usuario = new UsuarioCG(emailCG, passwordCG);
+            usuarios.add(usuario);
         }
 
         cursor.close();
@@ -45,7 +46,16 @@ public class DalUsuarioCG {
         return usuarios;
     }
 
-    public void insert() {
 
+    public void insert() {
+        sqLiteDatabase = databaseManagerCG.getWritableDatabase();
+
+        String insertQuery1 = "INSERT INTO UsuariosCG (EMAILCG, PASSWORDCG) VALUES ('steven@gmail.com', 'Mi34!@')";
+        sqLiteDatabase.execSQL(insertQuery1);
+
+        String insertQuery2 = "INSERT INTO UsuariosCG (EMAILCG, PASSWORDCG) VALUES ('esteban@gmail.com', 'Se12@@')";
+        sqLiteDatabase.execSQL(insertQuery2);
+
+        sqLiteDatabase.close();
     }
 }

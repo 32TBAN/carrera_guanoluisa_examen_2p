@@ -2,13 +2,16 @@ package esteban.g.carrera_guanoluisa_examen_2p;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,14 +30,34 @@ public class MainActivity extends AppCompatActivity {
         editTextPasswordCG = findViewById(R.id.etContraseñaCG);
 
         Button validarButton = findViewById(R.id.btnIniciarSesionCG);
+        TextView tvInfoLoginCG = findViewById(R.id.tvInfoLoginCG);
+        List<UsuarioCG> listaUsuarioCG = UsurioLogicaCG.getListUsuarios(MainActivity.this);
+
+        String usuario1Info = String.format("User 1: %s, Password: %s\n",
+                listaUsuarioCG.get(0).getUsernameCG(), listaUsuarioCG.get(0).getPassword());
+
+        String usuario2Info = String.format("User 2: %s, Password: %s\n",
+                listaUsuarioCG.get(1).getUsernameCG(), listaUsuarioCG.get(1).getPassword());
+
+        tvInfoLoginCG.setText(usuario1Info + usuario2Info);
 
         validarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DalUsuarioCG dalUsuarioCG = new DalUsuarioCG(MainActivity.this);
-                dalUsuarioCG.insert();
+                //dalUsuarioCG.insert();
                 if (validarUsuarioeditTextPasswordCG(editTextPasswordCG.getText().toString())) {
-                    List<UsuarioCG> listaUsuarioCG = UsurioLogicaCG.getListUsuarios(MainActivity.this);
+
+                    for (int i = 0; i < listaUsuarioCG.toArray().length; i++) {
+                        if (Objects.equals(listaUsuarioCG.get(i).getUsernameCG(), editTextUserCG.getText().toString())
+                        && Objects.equals(listaUsuarioCG.get(i).getPassword(), editTextPasswordCG.getText().toString())){
+                            Intent intent  = new Intent(MainActivity.this,ListaTareasCG.class);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(MainActivity.this, "Contrasenia o usuarios incorectos", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                        
                 } else {
                     Toast.makeText(MainActivity.this, "Error de validación", Toast.LENGTH_SHORT).show();
                 }
