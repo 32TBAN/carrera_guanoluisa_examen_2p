@@ -33,5 +33,12 @@ public class AgregarTareaActivityCG extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.iconDelete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

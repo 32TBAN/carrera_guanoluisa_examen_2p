@@ -42,6 +42,12 @@ public class ListaTareasCG extends AppCompatActivity {
                 agregarTarea(personalTasksLayout, nuevaTarea);
             }
         }
+        findViewById(R.id.iconDelete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eliminarTareasMarcadas();
+            }
+        });
 
         findViewById(R.id.ivAdd).setOnClickListener(new View.OnClickListener() {
 
@@ -120,4 +126,33 @@ public class ListaTareasCG extends AppCompatActivity {
             }
         }
     }
+    private void eliminarTareasMarcadas() {
+
+        if (isBusinessTask) {
+            eliminarTareasMarcadas(businessTasksLayout, tareasListBusunes);
+        } else {
+            eliminarTareasMarcadas(personalTasksLayout, tareasList);
+        }
+    }
+
+    private void eliminarTareasMarcadas(LinearLayout layout, List<TareaCG> listaTareas) {
+        int childCount = layout.getChildCount();
+        List<Integer> itemsToRemove = new ArrayList<>();
+
+        for (int i = childCount - 1; i >= 0; i--) {
+            View child = layout.getChildAt(i);
+            if (child instanceof CheckBox) {
+                CheckBox checkBox = (CheckBox) child;
+                if (checkBox.isChecked()) {
+                    itemsToRemove.add(i / 3);
+                }
+            }
+        }
+
+        for (int position : itemsToRemove) {
+            listaTareas.remove(position);
+            layout.removeViews(position * 3, 3);
+        }
+    }
+
 }
