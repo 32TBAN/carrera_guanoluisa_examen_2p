@@ -49,7 +49,7 @@ public class ListaTareasCG extends AppCompatActivity {
             public void onClick(View view) {
                 if (isBusinessTask) {
                     Intent intent = new Intent(ListaTareasCG.this, BusinessTasksActivityCG.class);
-                    startActivity(intent);
+                    startActivityForResult(intent,REQUEST_CODE_ADD_TASK);
                 } else {
                     Intent intent = new Intent(ListaTareasCG.this, AgregarTareaActivityCG.class);
                     startActivityForResult(intent, REQUEST_CODE_ADD_TASK);

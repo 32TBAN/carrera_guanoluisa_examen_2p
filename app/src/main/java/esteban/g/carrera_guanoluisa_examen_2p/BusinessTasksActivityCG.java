@@ -30,7 +30,8 @@ public class BusinessTasksActivityCG extends AppCompatActivity {
 
                 Intent intent = new Intent(BusinessTasksActivityCG.this, ListaTareasCG.class);
                 intent.putExtra("tarea", nuevaTarea);
-                startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
