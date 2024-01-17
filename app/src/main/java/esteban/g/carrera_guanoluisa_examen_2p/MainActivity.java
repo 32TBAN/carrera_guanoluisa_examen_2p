@@ -21,6 +21,7 @@ import esteban.g.carrera_guanoluisa_examen_2p.Logica.UsurioLogicaCG;
 
 public class MainActivity extends AppCompatActivity {
     private EditText editTextUserCG, editTextPasswordCG;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,15 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 if (validarUsuarioeditTextPasswordCG(editTextPasswordCG.getText().toString())) {
 
                     for (int i = 0; i < listaUsuarioCG.toArray().length; i++) {
-                        if (Objects.equals(listaUsuarioCG.get(i).getUsernameCG(), editTextUserCG.getText().toString())
-                        && Objects.equals(listaUsuarioCG.get(i).getPassword(), editTextPasswordCG.getText().toString())){
-                            Intent intent  = new Intent(MainActivity.this,ListaTareasCG.class);
+                        String contra = listaUsuarioCG.get(i).getPassword();
+                        String user = listaUsuarioCG.get(i).getUsernameCG();
+                        String textContra = editTextPasswordCG.getText().toString();
+                        String tectUser = editTextUserCG.getText().toString();
+                        if (user.equals(tectUser) && contra.equals(textContra)) {
+                            Intent intent = new Intent(MainActivity.this, ListaTareasCG.class);
                             startActivity(intent);
-                        }else{
+                            break;
+                        } else {
                             Toast.makeText(MainActivity.this, "Contrasenia o usuarios incorectos", Toast.LENGTH_SHORT).show();
                         }
                     }
-                        
+
                 } else {
                     Toast.makeText(MainActivity.this, "Error de validación", Toast.LENGTH_SHORT).show();
                 }
