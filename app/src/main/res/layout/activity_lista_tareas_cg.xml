@@ -10,40 +10,9 @@
         android:background="#3498db"
         android:padding="10dp">
 
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tu Aplicación"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:layout_centerVertical="true"/>
+        <!-- Resto del contenido del titleBar (íconos, título, etc.) -->
 
-        <ImageView
-            android:id="@+id/icon1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"/>
-
-        <ImageView
-            android:id="@+id/icon2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/icon1"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"/>
-
-        <ImageView
-            android:id="@+id/iconEliminar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/icon2"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"/>
     </RelativeLayout>
-
 
     <LinearLayout
         android:id="@+id/tabs"
@@ -54,6 +23,7 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
+        <!-- Cambié el atributo onClick por un Listener en el código Java -->
         <TextView
             android:id="@+id/tabPersonal"
             android:layout_width="0dp"
@@ -63,8 +33,7 @@
             android:clickable="true"
             android:text="Personal"
             android:textSize="16sp"
-            android:textColor="#000"
-            android:onClick="cambiarPestana"/>
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/tabBusiness"
@@ -75,10 +44,8 @@
             android:clickable="true"
             android:text="Business"
             android:textSize="16sp"
-            android:textColor="#000"
-            android:onClick="cambiarPestana"/>
+            android:textColor="#000" />
     </LinearLayout>
-
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -86,41 +53,19 @@
         android:layout_below="@id/tabs">
 
         <!-- Contenido de la pestaña Personal -->
-        <ScrollView
-            android:id="@+id/scrollPersonal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:id="@+id/layoutPersonal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <CheckBox
-                    android:id="@+id/checkBoxTarea1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tarea 1"/>
-
-                <CheckBox
-                    android:id="@+id/checkBoxTarea2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tarea 2"/>
-
-
-            </LinearLayout>
-        </ScrollView>
-
-
-        <FrameLayout
-            android:id="@+id/layoutBusiness"
+        <RecyclerView
+            android:id="@+id/recyclerViewPersonal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
-        </FrameLayout>
+            android:visibility="gone" />
+
+        <!-- Contenido de la pestaña Business -->
+        <RecyclerView
+            android:id="@+id/recyclerViewBusiness"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
     </FrameLayout>
+
 </RelativeLayout>
